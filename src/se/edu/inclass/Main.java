@@ -1,4 +1,5 @@
 package se.edu.inclass;
+import java.util.stream.Stream;
 
 import se.edu.inclass.data.DataManager;
 import se.edu.inclass.task.Deadline;
@@ -21,6 +22,8 @@ public class Main {
 
         System.out.println("Total number of deadlines: " + countDeadlines(tasksData));
 
+        streamPrintDeadLines(tasksData);
+        System.out.println("Total number of deadlines using streams: " + streamCountDeadlines(tasksData));
     }
 
     private static int countDeadlines(ArrayList<Task> tasksData) {
@@ -45,11 +48,22 @@ public class Main {
         }
     }
 
+    public static void streamPrintData(ArrayList<Task> tasksData){
+        System.out.println("Printing data using streams");
+        tasksData.forEach(System.out::println);
+    }
+
     public static void printDeadlines(ArrayList<Task> tasksData) {
         for (Task t : tasksData) {
             if (t instanceof Deadline) {
                 System.out.println(t);
             }
         }
+    }
+    public static void streamPrintDeadLines(ArrayList<Task> tasksData){
+        System.out.println("Printing deadlines using stream");
+        tasksData.stream()
+                .filter( x -> (x instanceof Deadline))
+                .forEach(System.out::println);
     }
 }
